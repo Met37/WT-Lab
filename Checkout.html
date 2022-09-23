@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keera</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+
+    <!-- navigation bar -->
+
+    <section id="header">
+
+        <a href="#"><img src="img/logo.png" class="Logo" alt="logo"></a>
+        <div>
+            <ul id="Navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+
+                <!-- m -->
+                <li><a class="active" href="cart.html">Cart</i></a></li>  
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- cart div banner -->
+
+    <div style="margin-top: 3px;">
+        <img src="img/cart_div2.jpg" alt="cart div background image" style="height: 10em; width:100%; margin: 20px 0px 0px 0px;">
+    </div>
+
+    <section id="form" >
+        <h2 style="color: #960dae; padding-top:20px; padding-left:100px;">Shipping & Delivery</h3>
+        <p style="color: #c153d4; padding-top:0px; padding-bottom: 42px; padding-left:100px;">All fields are required</p>
+    
+        <form id="info" onsubmit="return validateForm()" method="post">
+            <p> Full Name: </p>
+            <input type="text" name="name"> <br>
+            <p> Phone Number: </p>
+            <input type="text" name="number"> <br>
+            <p> City: </p>
+            <input list="city" name="cities" id="cities">
+            <datalist id="city">
+                <option value="Dhaka">
+                <option value="Chittagong">
+                <option value="Khulna">
+                <option value="Sylhet">
+                <option value="Rajshahi">
+                <option value="Rangpur">
+                <option value="Mymensingh">
+                <option value="Barishal">
+                <option value="Cumilla">
+                <option value="Narayanganj">
+                <option value="Gazipur">
+            </datalist> <br>
+            <p> Address: </p>
+            <input type="text" name="address">  <br> <br> <br>
+            <input type="submit" id="order_btn" value="Confirm Order">
+        </form>
+        <button class="normal" id="confirm" onclick="validateForm()"> <a href="Checkout.html" ><strong>Confirm Order</strong></a></button>
+    </section>
+
+   
+    
+    
+
+   
+
+
+    <script src="js/cart.js"></script>
+
+</body>
+
+</html>

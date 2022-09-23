@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keera</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" href="css/cart.css">
+    
+</head>
+
+<body>
+
+    <!-- navigation bar -->
+
+    <section id="header">
+
+        <a href="#"><img src="img/logo.png" class="Logo" alt="logo"></a>
+        <div>
+            <ul id="Navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+
+                <!-- m -->
+                <li><a class="active" href="cart.html">Cart</i></a></li>  
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- cart div banner -->
+
+    <div style="margin-top: 3px;">
+        <img src="img/cart_div2.jpg" alt="cart div background image" style="height: 10em; width:100%; margin: 20px 0px 0px 0px;">
+    </div>
+
+
+    <!-- cart table section -->
+
+    <section id="cart" class="section-p1">
+        <table width="100%"; style="margin-top: 25px;" >
+            <thead>
+                <th>
+                    <tr>
+                        <td>Remove</td>
+                        <td>Image</td>
+                        <td>Product</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Subtotal</td>
+                    </tr>
+                </th>
+            </thead>
+            
+            <tbody>
+                <tr id="item">
+                    <td>
+                        <!-- <a href="#"><i class="far fa-times-circle"></i></a> -->
+                        <button type="button" class="remove" onclick="remove()"><i class="far fa-times-circle"></i></button>
+
+                    </td>
+                    <td>
+                        <img src="img/earring1.jpg" alt="">
+                        <td>Floral Earrings</td>
+                        <td>550৳</td>
+                        <td >
+                            <input type="number" value="1" style="width:42% ; padding: 3px 2px;">
+                        </td>
+                        <td>550৳</td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <a href="#"><i class="far fa-times-circle"></i></a> -->
+                        <button type="button" class="remove"><i class="far fa-times-circle"></i></button>
+                    </td>
+                    <td>
+                        <img src="img/pendant1.webp" alt="">
+                        <td>Floral Earrings</td>
+                        <td>550৳</td>
+                        <td >
+                            <input type="number" value="1" style="width:42% ; padding: 3px 2px;">
+                        </td>
+                        <td>550৳</td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- <a href="#"><i class="far fa-times-circle"></i></a> -->
+                        <button type="button" class="remove"><i class="far fa-times-circle"></i></button>
+                    </td>
+                    <td>
+                        <img src="img/ring1.jpg" alt="">
+                        <td>Floral Earrings</td>
+                        <td>550৳</td>
+                        <td >
+                            <input type="number" value="1" style="width:42% ; padding: 3px 2px;">
+                        </td>
+                        <td>550৳</td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+   
+
+    <!-- apply coupon and subtotal section -->
+
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter Your Coupon Code">
+                <button class="normal"><strong>Apply</strong></button>
+            </div>
+        </div>
+
+        <div id="subtotal">
+            <h3>Cart Total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>2200৳</td>
+                </tr>
+                <tr>
+                    <td>Delivery Charge</td>
+                    <td>80৳</td>
+                </tr>
+                <tr>
+                    <td> <strong>Total</strong> </td>
+                    <td> <strong>2280৳</strong> </td>
+                </tr>
+            </table>
+            <button class="normal"> <a href="Checkout.html" ><strong>Proceed to checkout</strong></a></button>
+        </div>
+    </section>
+
+
+    <script src="js/cart.js"></script>
+
+</body>
+
+</html>

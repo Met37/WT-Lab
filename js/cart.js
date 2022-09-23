@@ -1,9 +1,39 @@
-function remove() {
-    const element = document.getElementById("item");
-    element.remove();
-  }
+// function rem() {
+//     const element = document.getElementById("item");
+//     element.remove();
+//   }
 
+// document.querySelectorAll('item').forEach(item => {
+//     item.addEventListener('click', event => {
+//       event.remove();
+//     })
+//   })
 
+  const rem_item = document.querySelectorAll("#item");
+  rem_item.forEach(item => {
+    // item.addEventListener('click', event => {
+    //  event.remove();
+    console.log(item);
+  });
+
+  for(let i = 0; i < rem_item.length; i++) {
+    rem_item[i].addEventListener('click', e => {
+      rem_item[i].remove();
+    });
+}
+
+const add_item = document.querySelectorAll("#item");
+  add_item.forEach(item => {
+    // item.addEventListener('click', event => {
+    //  event.remove();
+    console.log(item);
+  });
+
+  for(let i = 0; i < rem_item.length; i++) {
+    rem_item[i].addEventListener('click', e => {
+      rem_item[i].add();
+    });
+}
 
 
 

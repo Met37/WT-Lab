@@ -80,6 +80,12 @@
   
   
   /* cart page m */
+
+  body
+  {
+    background-color: #E6DBFF; 
+    background-image: linear-gradient(#D5D5FF, #E6DBFF);
+  }
   
   #cart {
     overflow-x: auto;

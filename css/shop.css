@@ -80,7 +80,7 @@
 
 
   #page-header {
-    background-image: url("Images/shop-banner.jpg");
+     background-image: url("/WT-Lab-main/img/shop-banner.jpg");
     width: 100%;
     height: 40vh;
     background-size: cover;

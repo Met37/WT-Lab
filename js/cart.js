@@ -10,3 +10,14 @@
       rem_item[i].remove();
     });
 }
+
+const el = document.getQuerySelector("#confirm");
+console.log(el);
+
+el.addEventListener("click", pop());
+
+
+function pop()
+{
+  alert("Your Order number is -. Thank You for shopping with us!");
+}

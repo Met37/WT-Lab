@@ -8,6 +8,8 @@ use App\Models\Catagory;
 
 use App\Models\Product;
 
+use App\Models\Order;
+
 class AdminController extends Controller
 {
     public function view_catagory()
@@ -81,20 +83,16 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Product Added Successfully');
     }
-}
 
+    public function show_product()
 
-//Alo**********
-
-public function show_product()
 {
-    $product = product::all();
-    return view('admin.show_product'), compact('product');
+    $product= product::all();
 
-   
+    return view('admin.show_product', compact('product'));
 }
 
-public function show_product()
+public function show_products()
 {
     $product = product::find($id);
     $product->delete();
@@ -110,7 +108,7 @@ public function update_product()
     
     $category = category::all();
    
-    return view('admin.update_product'), compact('product', 'category');
+    return view('admin.update_product', compact('product', 'category'));
 
    
 }
@@ -138,11 +136,31 @@ public function update_product_confirm(Request $request, $id)
     $product->save();
 
     return redirect()-> back()->with('message', 'Product Updated Successfully');
-
-
-
-   
-   
-
    
 }
+
+public function order()
+{
+    $order=order::all();
+
+    return view ('admin.order', compact('order'));
+    
+}
+
+public function delivered($id)
+{
+    $order= order::find($id);
+
+    $order->delivery_status="Delivered";
+
+    $order->payment_status="Paid";
+
+    $order->save();
+
+    return redirect()-> back();
+}
+
+}
+
+
+

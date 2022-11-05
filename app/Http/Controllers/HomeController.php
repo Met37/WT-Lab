@@ -154,6 +154,23 @@ class HomeController extends Controller
    }
 
 
+   public function redirects()
+   {
+      $usertype=Auth::user()->usertype;
+
+      if($usertype=='1')
+      {
+         $total_product=product::all()->count();
+         return view('admin.home',compact('total_product'));
+      }
+      else
+      {
+         $product=Product::paginate(10);
+         return view('home.userpage',compact('product'));
+      }
+   }
+
+
 
 
 }

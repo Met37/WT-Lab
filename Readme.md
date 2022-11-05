@@ -1,141 +1,66 @@
-# delayed-stream
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Buffers events from a stream until you are ready to handle them.
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Installation
+## About Laravel
 
-``` bash
-npm install delayed-stream
-```
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## Usage
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-The following example shows how to write a http echo server that delays its
-response by 1000 ms.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-``` javascript
-var DelayedStream = require('delayed-stream');
-var http = require('http');
+## Learning Laravel
 
-http.createServer(function(req, res) {
-  var delayed = DelayedStream.create(req);
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-  setTimeout(function() {
-    res.writeHead(200);
-    delayed.pipe(res);
-  }, 1000);
-});
-```
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you are not using `Stream#pipe`, you can also manually release the buffered
-events by calling `delayedStream.resume()`:
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-``` javascript
-var delayed = DelayedStream.create(req);
+## Laravel Sponsors
 
-setTimeout(function() {
-  // Emit all buffered events and resume underlaying source
-  delayed.resume();
-}, 1000);
-```
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-## Implementation
+### Premium Partners
 
-In order to use this meta stream properly, here are a few things you should
-know about the implementation.
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
-### Event Buffering / Proxying
+## Contributing
 
-All events of the `source` stream are hijacked by overwriting the `source.emit`
-method. Until node implements a catch-all event listener, this is the only way.
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-However, delayed-stream still continues to emit all events it captures on the
-`source`, regardless of whether you have released the delayed stream yet or
-not.
+## Code of Conduct
 
-Upon creation, delayed-stream captures all `source` events and stores them in
-an internal event buffer. Once `delayedStream.release()` is called, all
-buffered events are emitted on the `delayedStream`, and the event buffer is
-cleared. After that, delayed-stream merely acts as a proxy for the underlaying
-source.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### Error handling
+## Security Vulnerabilities
 
-Error events on `source` are buffered / proxied just like any other events.
-However, `delayedStream.create` attaches a no-op `'error'` listener to the
-`source`. This way you only have to handle errors on the `delayedStream`
-object, rather than in two places.
-
-### Buffer limits
-
-delayed-stream provides a `maxDataSize` property that can be used to limit
-the amount of data being buffered. In order to protect you from bad `source`
-streams that don't react to `source.pause()`, this feature is enabled by
-default.
-
-## API
-
-### DelayedStream.create(source, [options])
-
-Returns a new `delayedStream`. Available options are:
-
-* `pauseStream`
-* `maxDataSize`
-
-The description for those properties can be found below.
-
-### delayedStream.source
-
-The `source` stream managed by this object. This is useful if you are
-passing your `delayedStream` around, and you still want to access properties
-on the `source` object.
-
-### delayedStream.pauseStream = true
-
-Whether to pause the underlaying `source` when calling
-`DelayedStream.create()`. Modifying this property afterwards has no effect.
-
-### delayedStream.maxDataSize = 1024 * 1024
-
-The amount of data to buffer before emitting an `error`.
-
-If the underlaying source is emitting `Buffer` objects, the `maxDataSize`
-refers to bytes.
-
-If the underlaying source is emitting JavaScript strings, the size refers to
-characters.
-
-If you know what you are doing, you can set this property to `Infinity` to
-disable this feature. You can also modify this property during runtime.
-
-### delayedStream.dataSize = 0
-
-The amount of data buffered so far.
-
-### delayedStream.readable
-
-An ECMA5 getter that returns the value of `source.readable`.
-
-### delayedStream.resume()
-
-If the `delayedStream` has not been released so far, `delayedStream.release()`
-is called.
-
-In either case, `source.resume()` is called.
-
-### delayedStream.pause()
-
-Calls `source.pause()`.
-
-### delayedStream.pipe(dest)
-
-Calls `delayedStream.resume()` and then proxies the arguments to `source.pipe`.
-
-### delayedStream.release()
-
-Emits and clears all events that have been buffered up so far. This does not
-resume the underlaying source, use `delayedStream.resume()` instead.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-delayed-stream is licensed under the MIT license.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
